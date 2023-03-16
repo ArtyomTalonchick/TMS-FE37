@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const S = {
     container: styled.fieldset`
         width: 100%;
@@ -20,14 +19,14 @@ const S = {
         }
     `,
     legend: styled.legend`
-        color: ${({ theme }) => theme.colors.grey[9]};
+
     `,
     input: styled.input`
         width: 100%;
-        height: 40px;
+        height: 30px;
         position: relative;
         box-sizing: border-box;
-        top: -16px;
+        top: -11px;
         background-color: transparent;
         outline: none;
         border: none;

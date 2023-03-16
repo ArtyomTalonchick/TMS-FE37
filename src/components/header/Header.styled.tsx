@@ -9,6 +9,10 @@ const S = {
         right: 0;
         height: ${({ theme }) => theme.constants.headerHeight};
         background-color: ${({ theme }) => theme.colors.grey[4]};
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 40px;
     `,
     linksList: styled.ul`
         list-style: none;

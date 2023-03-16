@@ -1,7 +1,7 @@
 import React from "react";
 import S from "./TextField.styled";
 
-interface PropsType {
+interface PropsType extends Omit<React.HTMLProps<HTMLInputElement>, "ref" | "as"> {
 	label: string;
 	value: string;
 	setValue: (value: string) => void;
@@ -11,6 +11,7 @@ const TextField: React.FC<PropsType> = ({
 	label,
 	value,
 	setValue,
+	...props
 }) => {
 
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +28,7 @@ const TextField: React.FC<PropsType> = ({
 				type="text"
 				value={value}
 				onChange={onChange}
+				{...props}
 			/>
         </S.container>
 	);

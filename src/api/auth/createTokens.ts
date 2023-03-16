@@ -18,8 +18,4 @@ const createTokens = (data: CreateTokensRequestType) => (
     })
 );
 
-const authApi = {
-    createTokens,
-};
-
-export default authApi;
+export default createTokens;

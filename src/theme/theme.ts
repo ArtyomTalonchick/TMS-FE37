@@ -8,6 +8,7 @@ export interface ThemeType {
     };
     colors: {
         grey: ColorType;
+        error: string;
     };
 }
 
@@ -28,5 +29,6 @@ export const defaultTheme: ThemeType = {
             8: "#37474F",
             9: "#263238",
         },
+        error: "#F44336",
     },
 };
