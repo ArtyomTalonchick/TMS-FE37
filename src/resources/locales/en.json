@@ -1,0 +1,17 @@
+{
+    "header": {
+        "links": {
+            "about": "About",
+            "login": "Login",
+            "account": "Account",
+            "posts": "Posts"
+        },
+        "logout": "Logout"
+    },
+    "loginPage": {
+        "header": "Login",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Submit"
+    }
+}

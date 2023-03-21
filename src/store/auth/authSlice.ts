@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 import authApi, {
     CreateTokensRequestType, CreateTokensResponseType, GetAccountResponseType, RefreshTokensResponseType,
 } from "../../api/auth/authApi";
@@ -51,11 +52,21 @@ const createTokens = createAsyncThunk<CreateTokensResponseType, CreateTokensRequ
             const response = await authApi.createTokens(data);
             return response.data;
         } catch (error) {
-            // if (error instanceof AxiosError) {
-            //     return 
-            // }
+            if (error instanceof AxiosError && error.response?.data?.detail) {
+                return thunksApi.rejectWithValue(error.response.data.detail);
+            }
             return thunksApi.rejectWithValue("Login error");
         }
+    },
+);
+
+const verifyToken = createAsyncThunk(
+    "auth/verifyToken",
+    async (data, thunksApi) => {
+        await executeAuthRequest(
+            () => authApi.verifyToken(),
+            thunksApi.dispatch,
+        )
     },
 );
 
@@ -119,6 +130,7 @@ export const authActions = {
     ...authSlice.actions,
     createTokens,
     getAccount,
+    verifyToken,
 };
 
 const authReducer = authSlice.reducer;

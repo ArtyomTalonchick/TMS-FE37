@@ -1,10 +1,12 @@
 import React from "react";
+import useTranslation from "../../hooks/useTranslations";
 import { authActions } from "../../store/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import C from "../../styledComponents";
 import S from "./Header.styled";
 
 const Header: React.FC = () => {
+	const { t, toggleLanguage } = useTranslation();
 	const dispatch = useAppDispatch();
 	const isLogged = useAppSelector((state) => state.auth.isLogged);
 
@@ -16,23 +18,30 @@ const Header: React.FC = () => {
 		<S.container>
 			<S.linksList>
 				<S.link to="/">
-					About
+					{t.header.links.about}
 				</S.link>
+				<S.link to="/posts">
+					{t.header.links.posts}
+				</S.link>
+
 				{!isLogged ? (
 					<S.link to="/login">
-						Login
+						{t.header.links.login}
 					</S.link>
 				) : (
 					<S.link to="/account">
-						Account
+						{t.header.links.account}
 					</S.link>
 				)}
 			</S.linksList>
 			{isLogged && (
 				<C.button onClick={handleLogout}>
-					Logout
+					{t.header.logout}
 				</C.button>
-			)}
+			)}			
+			<C.button onClick={toggleLanguage} type="button">
+				Toggle language
+			</C.button>
 		</S.container>
 	);
 }

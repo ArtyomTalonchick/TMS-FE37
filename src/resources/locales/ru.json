@@ -1,0 +1,17 @@
+{
+    "header": {
+        "links": {
+            "about": "О нас",
+            "login": "Войти",
+            "account": "Профиль",
+            "posts": "Посты"
+        },
+        "logout": "Выйти"
+    },
+    "loginPage": {
+        "header": "Войти",
+        "email": "Email",
+        "password": "Пароль",
+        "submit": "Войти"
+    }
+}

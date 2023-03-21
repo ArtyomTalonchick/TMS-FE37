@@ -5,12 +5,14 @@ interface PropsType extends Omit<React.HTMLProps<HTMLInputElement>, "ref" | "as"
 	label: string;
 	value: string;
 	setValue: (value: string) => void;
+	inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 const TextField: React.FC<PropsType> = ({
 	label,
 	value,
 	setValue,
+	inputRef,
 	...props
 }) => {
 
@@ -25,6 +27,7 @@ const TextField: React.FC<PropsType> = ({
 				{label}
 			</S.legend>
 			<S.input
+				ref={inputRef}
 				type="text"
 				value={value}
 				onChange={onChange}
