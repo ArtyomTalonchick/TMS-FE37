@@ -4,7 +4,7 @@ import S from "./TextField.styled";
 interface PropsType extends Omit<React.HTMLProps<HTMLInputElement>, "ref" | "as"> {
 	label: string;
 	value: string;
-	setValue: (value: string) => void;
+	setValue?: (value: string) => void;
 	inputRef?: React.RefObject<HTMLInputElement>;
 }
 
@@ -18,7 +18,7 @@ const TextField: React.FC<PropsType> = ({
 
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = event.target.value;
-		setValue(newValue);
+		setValue?.(newValue);
 	};
 
 	return (

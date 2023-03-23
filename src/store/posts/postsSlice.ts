@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import postsApi from "../../api/posts/postsApi";
-import { PostType } from "../../types/postsTypes";
+import { PostsFilterType, PostType } from "../../types/postsTypes";
 
 interface PostsStateType {
     posts: PostType[];
@@ -14,11 +14,11 @@ const initialState: PostsStateType = {
     loading: false,
 };
 
-const getPostsList = createAsyncThunk<PostType[], void, { rejectValue: string }>(
+const getPostsList = createAsyncThunk<PostType[], PostsFilterType, { rejectValue: string }>(
     "posts/getPostsList",
     async (data, thunksApi) => {
         try {
-            const response = await postsApi.getPostsList();
+            const response = await postsApi.getPostsList(data);
             return response.data;
         } catch {
             return thunksApi.rejectWithValue("Server error");
@@ -36,16 +36,14 @@ const postsSlice = createSlice({
             state.error = undefined;
             // state.posts = [];
         });
-
         builder.addCase(getPostsList.rejected, (state, { payload }) => {
             state.loading = false;
             state.error = payload;
         });
-
         builder.addCase(getPostsList.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.posts = payload;
-        });
+        });        
     },
 });
 

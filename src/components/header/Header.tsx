@@ -23,6 +23,9 @@ const Header: React.FC = () => {
 				<S.link to="/posts">
 					{t.header.links.posts}
 				</S.link>
+				<S.link to="/posts/create">
+					{t.header.links.createPost}
+				</S.link>
 
 				{!isLogged ? (
 					<S.link to="/login">

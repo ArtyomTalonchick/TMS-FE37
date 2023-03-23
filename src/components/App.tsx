@@ -8,7 +8,9 @@ import { GlobalStyle } from "./globalStyle";
 import Header from "./header/Header";
 import About from "./pages/about/About";
 import Account from "./pages/account/Account";
+import CreatePost from "./pages/createPost/CreatePost";
 import Login from "./pages/login/Login";
+import PostItem from "./pages/postItem/PostItem";
 import Posts from "./pages/posts/Posts";
 
 const App: React.FC = () => {
@@ -30,6 +32,8 @@ const App: React.FC = () => {
 					<Routes>
 						<Route path="/" element={<About />} />
 						<Route path="/posts" element={<Posts />} />
+						<Route path="/posts/:id" element={<PostItem />} />
+						<Route path="/posts/create" element={<CreatePost />} />
 						{!isLogged ? (
 							<Route path="/login" element={<Login />} />
 						) : (

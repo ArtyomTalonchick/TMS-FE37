@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const S = {
     container: styled.header `
+        z-index: 10;
         position: fixed;
         top: 0;
         left: 0;

@@ -4,7 +4,8 @@
             "about": "About",
             "login": "Login",
             "account": "Account",
-            "posts": "Posts"
+            "posts": "Posts",
+            "createPost": "Create Post"
         },
         "logout": "Logout"
     },
