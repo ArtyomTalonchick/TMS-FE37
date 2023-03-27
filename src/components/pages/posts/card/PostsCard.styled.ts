@@ -7,6 +7,10 @@ const S = {
         margin: 0;
         max-width: 200px;
         overflow: hidden;
+        cursor: pointer;
+        &:hover {
+            border-color: ${({ theme }) => theme.colors.grey[9]};
+        }
     `,
     header: styled.div`
         align-self: baseline;

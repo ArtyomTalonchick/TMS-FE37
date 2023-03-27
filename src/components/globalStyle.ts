@@ -11,8 +11,22 @@ export const styles = {
         border: 1px solid ${({ theme }) => theme.colors.grey[4]};
         border-radius: 8px;
         padding: 24px;
-        margin: auto;
-        margin-top: 100px;
+        margin: 100px auto 24px;
+    `,
+    button: css`
+        cursor: pointer;
+        outline: none;
+        border: 1px solid ${({ theme }) => theme.colors.grey[4]};
+        padding: 8px 24px;
+        border-radius: 8px;
+        background-color: ${({ theme }) => theme.colors.grey[0]};
+
+        &:hover {
+            background-color: ${({ theme }) => theme.colors.grey[1]};
+        }
+        &:active {
+            background-color: ${({ theme }) => theme.colors.grey[2]};
+        }
     `,
 };
 
@@ -25,7 +39,11 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
-        color: ${({ theme }) => theme.colors.grey[9]};
+        background-color: ${({ theme }) => theme.colors.grey[0]};
+
+        * {
+            color: ${({ theme }) => theme.colors.grey[9]};
+        }
     }
 
     code {

@@ -14,11 +14,13 @@ const S = {
         align-items: center;
         justify-content: space-between;
         padding-right: 40px;
+        gap: 24px;
     `,
     linksList: styled.ul`
         list-style: none;
         display: flex;
-        gap: 24px
+        gap: 24px;
+        margin-right: auto;
     `,
     link: styled(NavLink)`
         cursor: pointer;

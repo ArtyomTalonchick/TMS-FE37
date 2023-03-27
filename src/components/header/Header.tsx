@@ -1,6 +1,7 @@
 import React from "react";
 import useTranslation from "../../hooks/useTranslations";
 import { authActions } from "../../store/auth/authSlice";
+import { settingsActions } from "../../store/settings/settingsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import C from "../../styledComponents";
 import S from "./Header.styled";
@@ -12,6 +13,10 @@ const Header: React.FC = () => {
 
 	const handleLogout = () => {
 		dispatch(authActions.logout());
+	};
+
+	const toggleTheme = () => {
+		dispatch(settingsActions.toggleTheme());
 	};
 
 	return (
@@ -41,9 +46,12 @@ const Header: React.FC = () => {
 				<C.button onClick={handleLogout}>
 					{t.header.logout}
 				</C.button>
-			)}			
+			)}
 			<C.button onClick={toggleLanguage} type="button">
 				Toggle language
+			</C.button>
+			<C.button onClick={toggleTheme} type="button">
+				Toggle theme
 			</C.button>
 		</S.container>
 	);

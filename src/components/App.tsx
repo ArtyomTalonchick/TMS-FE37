@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { authActions } from "../store/auth/authSlice";
 import {  useAppDispatch, useAppSelector } from "../store/store";
-import { defaultTheme } from "../theme/theme";
 import { GlobalStyle } from "./globalStyle";
 import Header from "./header/Header";
 import About from "./pages/about/About";
@@ -15,6 +14,7 @@ import Posts from "./pages/posts/Posts";
 
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const theme = useAppSelector((state) => state.settings.theme);
 	const isLogged = useAppSelector((state) => state.auth.isLogged);
 
 	useEffect(() => {
@@ -24,7 +24,7 @@ const App: React.FC = () => {
 	}, []);
 
 	return (
-		<ThemeProvider theme={defaultTheme}>
+		<ThemeProvider theme={theme}>
 			<GlobalStyle />
 			<BrowserRouter>
 				<Header />

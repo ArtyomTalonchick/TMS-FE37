@@ -41,7 +41,11 @@ const getPost = createAsyncThunk<PostType, number, { rejectValue: string }>(
 const postSlice = createSlice({
     name: "post",
     initialState,
-    reducers: {},
+    reducers: {
+        clearPost: (state) => {
+            state.post = null;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(createPost.pending, (state) => {
             state.loading = true;

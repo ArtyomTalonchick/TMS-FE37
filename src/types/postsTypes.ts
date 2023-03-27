@@ -3,10 +3,11 @@ export interface PostType {
     id: number;
     title: string
     body: string;
+    image?: string;
 };
 
 // export type CreatePostType = Omit<PostType, "id">;
-export interface CreatePostType extends Omit<PostType, "id"> {}
+export interface CreatePostType extends Omit<PostType, "id" | "userId"> {}
 
 export interface PostsFilterType {
     sortField: string;
