@@ -3,6 +3,7 @@ import S from "./TextField.styled";
 
 interface PropsType extends Omit<React.HTMLProps<HTMLInputElement>, "ref" | "as"> {
 	label: string;
+	error?: string;
 	value: string;
 	setValue?: (value: string) => void;
 	inputRef?: React.RefObject<HTMLInputElement>;
@@ -12,6 +13,7 @@ const TextField: React.FC<PropsType> = ({
 	label,
 	value,
 	setValue,
+	error,
 	inputRef,
 	...props
 }) => {
@@ -33,6 +35,11 @@ const TextField: React.FC<PropsType> = ({
 				onChange={onChange}
 				{...props}
 			/>
+			{error && (
+				<S.error>
+					{error}
+				</S.error>
+			)}
         </S.container>
 	);
 }

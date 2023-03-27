@@ -59,6 +59,7 @@ const postSlice = createSlice({
         builder.addCase(getPost.pending, (state) => {
             state.loading = true;
             state.error = null;
+            state.post = null;
         });
         builder.addCase(getPost.rejected, (state, { payload }) => {
             state.loading = false;

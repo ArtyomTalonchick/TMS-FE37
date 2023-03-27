@@ -31,6 +31,12 @@ const S = {
         outline: none;
         border: none;
     `,
+    error: styled.div`
+        color: ${({ theme }) => theme.colors.error};
+        font-size: 12px;
+        position: relative;
+        top: -8px;
+    `,
 };
 
 export default S;

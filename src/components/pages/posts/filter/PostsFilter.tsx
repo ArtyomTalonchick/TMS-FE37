@@ -4,6 +4,7 @@ import useDebounceValue from "../../../../hooks/useDebounceValue";
 import { postsActions } from "../../../../store/posts/postsSlice";
 import { useAppDispatch } from "../../../../store/store";
 import C from "../../../../styledComponents";
+import { PostsFilterType } from "../../../../types/postsTypes";
 import Select from "../../../ui/select/Select";
 import TextField from "../../../ui/textField/TextField";
 import S from "./PostsFilter.styled"
@@ -11,44 +12,52 @@ import S from "./PostsFilter.styled"
 const PostsFilter: React.FC = () => {
     const dispatch = useAppDispatch();
     const [sortField, setSortField] = useState("id");
-    const [sortDir, setSortDir] = useState("asc");
-    const [query, setQuery] = useState("");
+    const [sortDir, setSortDir] = useState("desc");
     const [page, setPage] = useState(1);
-    const debounceQuery = useDebounceValue(query, 500);
-    // const debounceQuery = useThrottleValue(query, 500);
+    const [query, debounceQuery, setQuery] = useDebounceValue("", 500);
+    // const [query, debounceQuery, setQuery] = useThrottleValue("", 500);
 
-    const fetchData = () => {
+    const fetchData = (filter: Partial<PostsFilterType> = {}) => {
         dispatch(postsActions.getPostsList({
             sortField,
             sortDir,
             query: debounceQuery,
             limit: 12,
             page,
+            ...filter,
         }));
     };
 
-    const onSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    const updatePageAndFetchData = (newPage: number) => {
+        setPage(newPage);
+        fetchData({ page: newPage });
+    };
 
-        fetchData();
+    const resetPageAndFetchData = () => {
+        updatePageAndFetchData(1);
     };
 
     const handlePrevPage = () => {
         if (page > 1) {
-            setPage(page - 1);
+            updatePageAndFetchData(page - 1);
         }
     };
 
-    const handleNextPage = () => {
-        setPage(page + 1);
+    const handleNextPage = () => {        
+        updatePageAndFetchData(page + 1);
+    };
+
+    const onSortSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        resetPageAndFetchData();
     };
 
     useEffect(() => {
-        fetchData();
-    }, [debounceQuery, page]);
+        resetPageAndFetchData();
+    }, [debounceQuery]);
 
     return (
-        <S.container onSubmit={onSubmit}>
+        <S.container onSubmit={onSortSubmit}>
             <Select
                 label="Sort field"
                 value={sortField}

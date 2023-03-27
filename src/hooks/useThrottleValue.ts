@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-const useThrottleValue = (value: string, delay: number) => {
-    const [throttle, setThrottle] = useState(value);
+const useThrottleValue = <T>(initialValue: T, delay: number): [T, T, React.Dispatch<React.SetStateAction<T>>] => {
+    const [value, setValue] = useState<T>(initialValue);
+    const valueRef = useRef<T>(initialValue);
+    const [throttle, setThrottle] = useState<T>(initialValue);
     const [active, setActive] = useState(false);
-    // const [intervalId, setintervalId] = useState<NodeJS.Timeout>(null);
-
-    // const updateThrottleValue = () => {
-
-    // }
 
     useEffect(() => {
         setActive(true);
+        valueRef.current = value;
 
         const timeoutId = setTimeout(() => setActive(false), delay);
         return () => clearTimeout(timeoutId);
@@ -20,14 +18,16 @@ const useThrottleValue = (value: string, delay: number) => {
         let intervalId: NodeJS.Timeout
         if (active) {
             intervalId = setInterval(() => {
-                console.log(value);
-                setThrottle(value);
+                // здесь замыкается переменная value, которая со временени становится неактуальной
+                // для этого используется ссылка valueRef, значение которой не замыкается и всегда является актуальным
+                // console.log(value, valueRef.current, Date.now());
+                setThrottle(valueRef.current);
             }, delay);
         }
         return () => clearInterval(intervalId);
     }, [active]);
 
-    return throttle;
+    return [value, throttle, setValue];
 };
 
 export default useThrottleValue;

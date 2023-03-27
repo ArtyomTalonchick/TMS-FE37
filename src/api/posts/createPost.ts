@@ -6,7 +6,10 @@ const createPost = async (data: CreatePostType) => {
     return axios<PostType>({
         method: "POST",
         url: "http://localhost:3001/posts",
-        data,
+        data: {
+            ...data,
+            userId: 123, // это должен сделать бэкенд
+        },
     });
 };
 
