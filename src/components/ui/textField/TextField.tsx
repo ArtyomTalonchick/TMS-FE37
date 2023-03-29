@@ -25,16 +25,19 @@ const TextField: React.FC<PropsType> = ({
 
 	return (
 		<S.container>
-        	<S.legend>
+			<S.legend>
 				{label}
 			</S.legend>
-			<S.input
-				ref={inputRef}
-				type="text"
-				value={value}
-				onChange={onChange}
-				{...props}
-			/>
+			<label>
+				<S.hiddenLabel>{label}</S.hiddenLabel>
+				<S.input
+					ref={inputRef}
+					type="text"
+					value={value}
+					onChange={onChange}
+					{...props}
+				/>
+			</label>
 			{error && (
 				<S.error>
 					{error}

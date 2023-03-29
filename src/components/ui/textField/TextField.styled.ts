@@ -18,6 +18,11 @@ const S = {
             border-color: ${({ theme }) => theme.colors.grey[2]};
         }
     `,
+    hiddenLabel: styled.div`
+        width: 0;
+        height: 0;
+        opacity: 0;
+    `,
     legend: styled.legend`
 
     `,
