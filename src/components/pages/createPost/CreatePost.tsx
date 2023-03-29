@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postActions } from "../../../store/post/postSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import C from "../../../styledComponents";
+import ImageField from "../../ui/imageField/ImageField";
 import Loader from "../../ui/loader/Loader";
 import TextField from "../../ui/textField/TextField";
 import S from "./CreatePost.styled";
@@ -15,6 +16,7 @@ const CreatePost: React.FC = () => {
 	const loading = useAppSelector((state) => state.post.loading);
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
+	const [image, setImage] = useState("");
 
 	useEffect(() => {
 		if (post?.id && post.id !== postIdRef.current) {
@@ -28,6 +30,7 @@ const CreatePost: React.FC = () => {
 		dispatch(postActions.createPost({
 			title,
 			body,
+			image,
 		}));
 	};
 
@@ -38,6 +41,7 @@ const CreatePost: React.FC = () => {
 			)}
 			<TextField label="Title" value={title} setValue={setTitle} />
             <TextField label="Body" value={body} setValue={setBody} />
+			<ImageField setValue={setImage} />
 			<C.button type="submit">
 				Submit
 			</C.button>

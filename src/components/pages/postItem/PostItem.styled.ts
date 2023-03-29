@@ -6,6 +6,9 @@ const S = {
         ${styles.card};
         width: 600px;
     `,
+    img: styled.img`
+        max-width: 100%;
+    `,
 };
 
 export default S;

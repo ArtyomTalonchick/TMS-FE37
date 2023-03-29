@@ -8,6 +8,18 @@ interface PropsType {
     postId: number;
 }
 
+const getCommentFormError = (value: string): string => {
+    if (value.length === 0) {
+        return "Required field";
+    }
+
+    if (value.length > 20) {
+        return `Max length is 20`;
+    }
+
+    return "";
+}
+
 const CommentsForm: React.FC<PropsType> = ({
     postId,
 }) => {
@@ -15,25 +27,21 @@ const CommentsForm: React.FC<PropsType> = ({
     const [value, setValue] = useState("");
     const [error, setError] = useState("");
 
-    const validate = () => {
-        if (value.length === 0) {
-            setError("Required field");
-        }
-    }
-
     useEffect(() => {
         setError("");
     }, [value]);
 
     const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        validate();
+        const newError = getCommentFormError(value);
+        setError(newError);
 
-        if (!error) {
+        if (!newError) {
             dispatch(commentsActions.createComment({
                 body: value,
                 postId,
             }));
+            setValue("");
         }
     };
 

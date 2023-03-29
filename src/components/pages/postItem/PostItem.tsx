@@ -38,6 +38,12 @@ const PostItem: React.FC = () => {
 					<>
 						<TextField label="Title" value={post.title} disabled />
 						<TextField label="Body" value={post.body} disabled />
+						{post.image && (
+							<S.img
+								alt="not found"
+								src={post.image}
+							/>
+						)}
 					</>
 				)}
 			</S.container>

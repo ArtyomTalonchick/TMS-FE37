@@ -3,6 +3,7 @@ export interface PostType {
     id: number;
     title: string
     body: string;
+    image?: string;
 };
 
 // export type CreatePostType = Omit<PostType, "id">;

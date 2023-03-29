@@ -14,6 +14,28 @@ export const styles = {
         margin: auto;
         margin-top: 100px;
     `,
+    button: css`
+        cursor: pointer;
+        outline: none;
+        border: none;
+        padding: 0 24px;
+        height: 50px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: ${({ theme }) => theme.colors.grey[0]};
+
+        &:hover {
+            background-color: ${({ theme }) => theme.colors.grey[1]};
+        }
+        &:active {
+            background-color: ${({ theme }) => theme.colors.grey[2]};
+        }
+        &:focus {
+            background-color: ${({ theme }) => theme.colors.grey[2]};
+        }
+    `
 };
 
 export const GlobalStyle = createGlobalStyle`
