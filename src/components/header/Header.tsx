@@ -4,6 +4,7 @@ import { authActions } from "../../store/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import C from "../../styledComponents";
 import S from "./Header.styled";
+import { settingsActions } from "../../store/settings/settingsSlice";
 
 const Header: React.FC = () => {
 	const { t, toggleLanguage } = useTranslation();
@@ -12,6 +13,10 @@ const Header: React.FC = () => {
 
 	const handleLogout = () => {
 		dispatch(authActions.logout());
+	};
+
+	const handleToggleTheme = () => {
+		dispatch(settingsActions.toggleTheme());
 	};
 
 	return (
@@ -42,6 +47,9 @@ const Header: React.FC = () => {
 					{t.header.logout}
 				</C.button>
 			)}			
+			<C.button onClick={handleToggleTheme} type="button">
+				Toggle theme
+			</C.button>
 			<C.button onClick={toggleLanguage} type="button">
 				Toggle language
 			</C.button>

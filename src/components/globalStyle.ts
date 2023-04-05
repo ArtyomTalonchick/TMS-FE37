@@ -25,6 +25,7 @@ export const styles = {
         align-items: center;
         justify-content: center;
         background-color: ${({ theme }) => theme.colors.grey[0]};
+        color: ${({ theme }) => theme.colors.grey[9]};
 
         &:hover {
             background-color: ${({ theme }) => theme.colors.grey[1]};
@@ -48,6 +49,7 @@ export const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
 
         color: ${({ theme }) => theme.colors.grey[9]};
+        background: ${({ theme }) => theme.colors.grey[0]};
     }
 
     code {
