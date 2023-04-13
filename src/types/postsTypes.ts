@@ -7,7 +7,7 @@ export interface PostType {
 };
 
 // export type CreatePostType = Omit<PostType, "id">;
-export interface CreatePostType extends Omit<PostType, "id" | "userId"> {}
+export interface CreatePostType extends Omit<PostType, "id"> {}
 
 export interface PostsFilterType {
     sortField: string;

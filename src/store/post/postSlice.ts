@@ -38,6 +38,18 @@ const getPost = createAsyncThunk<PostType, number, { rejectValue: string }>(
     },
 );
 
+const editPost = createAsyncThunk<PostType, PostType, { rejectValue: string }>(
+    "posts/editPost",
+    async (newPost, thunksApi) => {
+        try {
+            const response = await postsApi.editPost(newPost);
+            return response.data;
+        } catch {
+            return thunksApi.rejectWithValue("Server error");
+        }
+    },
+);
+
 const postSlice = createSlice({
     name: "post",
     initialState,
@@ -69,6 +81,19 @@ const postSlice = createSlice({
             state.loading = false;
             state.post = payload;
         });
+
+        builder.addCase(editPost.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        });
+        builder.addCase(editPost.rejected, (state, { payload }) => {
+            state.loading = false;
+            state.error = payload ?? null;
+        });
+        builder.addCase(editPost.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.post = payload;
+        });
     },
 });
 
@@ -76,6 +101,7 @@ export const postActions = {
     ...postSlice.actions,
     createPost,
     getPost,
+    editPost,
 };
 
 const postReducer = postSlice.reducer;

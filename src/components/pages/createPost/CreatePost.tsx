@@ -14,6 +14,7 @@ const CreatePost: React.FC = () => {
 	const post = useAppSelector((state) => state.post.post);
 	const postIdRef = useRef(post?.id);
 	const loading = useAppSelector((state) => state.post.loading);
+	const userId = useAppSelector((state) => state.auth.id);
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
 	const [image, setImage] = useState("");
@@ -31,6 +32,8 @@ const CreatePost: React.FC = () => {
 			title,
 			body,
 			image,
+			// userId: userId as number,
+			userId: userId!,
 		}));
 	};
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { commentsActions } from "../../store/comments/commentsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import Loader from "../ui/loader/Loader";

@@ -11,15 +11,30 @@ interface AuthStateType {
     refreshToken: string;
     loading: boolean;
     error?: string;
-    id?: number;
+    id?: number | null;
     username?: string;
     email?: string;
 }
+
+const getIdFromToken = (token: string): number | null => {
+    try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(window.atob(base64).split("").map(function(c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(""));
+    
+        return JSON.parse(jsonPayload).user_id;
+    } catch {
+        return null;
+    }
+};
 
 const getInitialState = (): AuthStateType => {
     const accessToken = localStorage.getItem("accessToken") ?? "";
     const refreshToken = localStorage.getItem("refreshToken") ?? "";
     const isLogged = !!(accessToken && refreshToken);
+    const id = getIdFromToken(accessToken);
 
     return {
         isLogged,
@@ -27,6 +42,7 @@ const getInitialState = (): AuthStateType => {
         refreshToken: isLogged ? refreshToken : "",
         loading: false,
         error: undefined,
+        id,
     };
 }
 
@@ -79,6 +95,7 @@ const authSlice = createSlice({
             state.isLogged = false;
             state.accessToken = "";
             state.refreshToken = "";
+            state.id = null;
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
         },
@@ -105,6 +122,7 @@ const authSlice = createSlice({
             state.isLogged = true;
             state.accessToken = payload.access;
             state.refreshToken = payload.refresh;
+            state.id = getIdFromToken(state.accessToken);
             localStorage.setItem("accessToken", state.accessToken);
             localStorage.setItem("refreshToken", state.refreshToken);
         });
